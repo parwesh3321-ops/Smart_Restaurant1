@@ -87,6 +87,12 @@ def create_app(test_config=None):
             return jsonify(error='Something went wrong. Please try again.'), 500
         return render_template('error.html', code=500, message='Something went wrong. Please try again.'), 500
 
+    
+    app = create_app()
+    app.run(host=os.getenv('HOST', '127.0.0.1'), port=app.config['PORT'], debug=False)
+@
+
+    
     @app.get('/health')
     def health():
         db.session.execute(select(Restaurant.id).limit(1)).all()
@@ -97,12 +103,7 @@ def create_app(test_config=None):
         from seed import seed_database
         db.create_all()
         seed_database(app.config['PUBLIC_BASE_URL'])
-        print('Database ready. Open http://127.0.0.1:5001')
-            from seed import seed_database
-
-    with app.app_context():
-        db.create_all()
-        seed_database(app.config['PUBLIC_BASE_URL'])
+        print('Database ready.')
 
     return app
 
