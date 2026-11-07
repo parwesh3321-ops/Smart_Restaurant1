@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Dine with us · {{ restaurant.name }}{% endblock %}
+{% block body_class %}customer-page{% endblock %}
+{% block content %}
+<div id="customer-app" data-token="{{ table.token }}">
+<header class="guest-header"><a class="brand" href="/menu/{{ table.token }}"><span class="brand-symbol">e<span>o</span></span><span>{{ restaurant.name }}<small>GOOD FOOD. GREAT COMPANY.</small></span></a><div class="guest-header-actions"><span class="pill green"><i data-lucide="armchair"></i> Table {{ '%02d' % table.number }}</span><button class="icon-btn" data-action="call-waiter" aria-label="Call waiter"><i data-lucide="bell-ring"></i></button></div></header>
+<main class="guest-main"><div class="customer-context"><a href="/customer"><i data-lucide="arrow-left"></i> Choose table</a><span>CUSTOMER VIEW</span><button class="btn soft small" id="guest-start-button" data-action="join">Start dining</button></div><section class="menu-hero"><div><span class="eyebrow">FRESHLY MADE. WARMLY SERVED.</span><h1>A seat at<br><em>our table.</em></h1><p>Seasonal ingredients. Familiar favourites.<br>A little something to make your day.</p><span class="hero-meta"><i data-lucide="leaf"></i> Made with care, served with love</span></div><div class="hero-image"><img src="/static/images/pasta.jpg" alt="Freshly prepared pasta with garden herbs"><span class="hero-caption">THE HOUSE FAVOURITE <b>Basil pesto farfalle</b></span></div></section>
+<div class="guest-nav-row"><nav class="guest-nav" aria-label="Dining navigation"><button data-view="menu" class="active"><i data-lucide="utensils"></i>Menu</button><button data-view="orders"><i data-lucide="receipt-text"></i>My table</button><button data-view="bill"><i data-lucide="wallet"></i>Bill & pay</button><button data-view="more"><i data-lucide="sparkles"></i>Little extras</button></nav><span id="guest-identity" class="muted"></span></div>
+<div id="guest-content"><div class="loading-state">Setting your table…</div></div></main>
+<button class="cart-float" id="cart-float" data-action="cart" hidden><span class="cart-count">0</span><b>View your cart</b><span class="cart-total">₹0</span><i data-lucide="arrow-right"></i></button>
+<footer class="guest-footer"><span class="brand-word">ember & olive</span><p>Enjoy the moment. We’ll take care of the rest.</p><small>Prices in INR · 5% demo tax · No real payments</small></footer>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/customer.js') }}" defer></script>{% endblock %}

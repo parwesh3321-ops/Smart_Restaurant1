@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ session.csrf }}">
+  <meta name="theme-color" content="#173e35">
+  <title>{% block title %}Ember & Olive · Smart Dining{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <script src="{{ url_for('static', filename='vendor/lucide.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/common.js') }}" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% block content %}{% endblock %}
+<div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+<dialog id="modal"><div id="modal-content"></div></dialog>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Welcome · {{ restaurant.name }}{% endblock %}
+{% block body_class %}customer-page public-page{% endblock %}
+{% block content %}
+<header class="public-header">
+  <a class="brand" href="/"><span class="brand-symbol">e<span>o</span></span><span>{{ restaurant.name }}<small>GOOD FOOD. GREAT COMPANY.</small></span></a>
+  <a class="btn secondary" href="{{ '/staff' if session.user_id else '/login' }}"><i data-lucide="briefcase-business"></i> {{ 'Staff workspace' if session.user_id else 'Staff Login' }}</a>
+</header>
+<main class="public-main">
+  <section class="welcome-hero">
+    <div class="welcome-copy">
+      <span class="eyebrow">YOUR SEAT. YOUR FAVOURITES. YOUR MOMENT.</span>
+      <h1>Good food.<br><em>Your way.</em></h1>
+      <p>Settle in. Explore the menu, order your favourites,<br class="desktop-break"> and enjoy a little more time at the table.</p>
+      <a class="btn primary large" href="/customer"><i data-lucide="utensils"></i> Customer View <i data-lucide="arrow-right"></i></a>
+      <span class="welcome-caption">Choose your table. No staff account needed.</span>
+      {% if current_visit %}<a class="continue-link" href="/menu/{{ current_visit.table.token }}">Continue dining at Table {{ '%02d' % current_visit.table.number }} <i data-lucide="arrow-up-right"></i></a>{% endif %}
+      <div class="welcome-signature"><span class="signature-line"></span><span>FRESHLY MADE. WARMLY SERVED.</span></div>
+    </div>
+    <div class="welcome-photo">
+      <img src="/static/images/pasta.jpg" alt="Basil pesto farfalle with cherry tomatoes">
+      <span class="welcome-photo-label">A HOUSE FAVOURITE <b>Basil pesto farfalle</b></span>
+      <div class="welcome-note"><span><i data-lucide="heart-handshake"></i></span><div><b>At your service.</b><small>From the first bite to the final bill.</small></div></div>
+    </div>
+  </section>
+  <div class="experience-heading"><span class="eyebrow">A LITTLE SIMPLER. A LOT MORE DELICIOUS.</span><h2>Your whole dining experience, in one place.</h2></div>
+  <section class="experience-grid" aria-label="Customer features">
+    <article><span class="experience-number">01</span><i data-lucide="salad"></i><h3>Find your next favourite.</h3><p>Browse food photos, explore categories and build your perfect order.</p></article>
+    <article><span class="experience-number">02</span><i data-lucide="bell-ring"></i><h3>We’ll take it from here.</h3><p>Follow your food from kitchen to table, or call your waiter with a tap.</p></article>
+    <article><span class="experience-number">03</span><i data-lucide="wallet-cards"></i><h3>Share the good things.</h3><p>Split the bill, try demo payments, collect points and leave a little feedback.</p></article>
+  </section>
+  <div class="staff-entry-note"><i data-lucide="chef-hat"></i><span>Part of the restaurant team?</span><a href="/login">Open Staff Login <i data-lucide="arrow-up-right"></i></a></div>
+</main>
+<footer class="public-footer"><span>{{ restaurant.name }} · Made for good company.</span><span>Local demo · Simulated payments only</span></footer>
+{% endblock %}

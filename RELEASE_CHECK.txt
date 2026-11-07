@@ -1,0 +1,36 @@
+SMART RESTAURANT — RELEASE VERIFICATION
+Date: 6 November 2026 (Asia/Kolkata)
+
+Clean installation:
+  bash SETUP_MAC.command
+  Result: PASS in a fresh Python 3.12 environment on Linux.
+  Python dependencies installed from the included requirements.txt.
+  Database initialization completed successfully.
+  A second initialization preserved the existing data.
+
+Automated suite from the clean release directory:
+  .venv/bin/python -m pytest tests -q --disable-warnings
+  Result: 42 passed in 5.32s.
+
+Other checks:
+  Python compilation: PASS
+  JavaScript parsing (all 4 application scripts): PASS
+  Mac helper shell syntax: PASS
+  Application health and demo admin login: PASS
+  12 tables, 12 menu items, 24 sample orders: PASS
+  12 table QR PNGs generated: PASS
+  Schema reference exported from SQLAlchemy models: PASS
+  No test guest transactions in bundled database: PASS
+
+Browser verification and platform limits: see docs/TEST_REPORT.md.
+No claim of physical MacBook M2 / Safari / phone testing is made.
+No real payment provider is connected.
+
+CUSTOMER ENTRY UPDATE — 7 November 2026 (Asia/Kolkata)
+  Fresh virtual environment; requirements.txt installed successfully.
+  Full automated suite: 47 passed in 6.68s.
+  Public home, customer picker, guest ordering and staff boundaries: PASS.
+  Browser: welcome > table picker > menu > join > order > bill > continue: PASS.
+  New pages at 337 px CSS width; picker also at 449 px: no horizontal overflow.
+  Original sample database retained byte-for-byte; UI QA used a separate database.
+  Updated screenshots and beginner setup documentation included.

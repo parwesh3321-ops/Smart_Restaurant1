@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Welcome back · Ember & Olive{% endblock %}
+{% block body_class %}login-page{% endblock %}
+{% block content %}
+<main class="login-layout">
+  <section class="login-story">
+    <a class="brand brand-light" href="/"><span class="brand-symbol">e<span>o</span></span><span>ember & olive<small>THE ART OF GOOD HOSPITALITY</small></span></a>
+    <div class="story-copy"><span class="eyebrow">A LITTLE WARMTH. A LOT OF POSSIBILITY.</span><h1>Great dining.<br>Beautifully<br><em>orchestrated.</em></h1><p>From the first welcome to the last bite,<br>bring every part of your restaurant together.</p><div class="story-tag"><i data-lucide="sparkles"></i> Thoughtful food. Seamless service.</div></div>
+    <span class="story-footer">SMART RESTAURANT MANAGEMENT & DIGITAL DINING</span>
+  </section>
+  <section class="login-form-wrap"><div class="login-inner">
+    <div class="login-top"><span class="pill green"><span class="dot"></span> LOCAL DEMO</span><span>Made for hospitality</span></div>
+    <span class="eyebrow">YOUR RESTAURANT, CONNECTED</span><h2>Welcome back.</h2><p class="muted">Sign in to make every service a little smoother.</p>
+    <div class="customer-login-entry"><span><b>Here to enjoy a meal?</b><small>No staff login needed.</small></span><a class="btn soft" href="/customer">Customer View <i data-lucide="arrow-right"></i></a></div>
+    <form id="login-form" class="form-stack">
+      <label>Username<input name="username" autocomplete="username" placeholder="Enter your username" required maxlength="80"></label>
+      <label>Password<div class="password-field"><input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required maxlength="200"><button type="button" data-action="toggle-password" aria-label="Show password"><i data-lucide="eye"></i></button></div></label>
+      <p id="login-error" class="form-error" role="alert"></p>
+      <button type="submit" class="btn primary large">Sign in to your workspace <i data-lucide="arrow-right"></i></button>
+    </form>
+    <div class="demo-access"><div class="section-line"><span>EXPLORE THE DEMO</span></div><p>Choose a role to fill the demo credentials.</p><div class="demo-roles"><button data-demo="admin"><i data-lucide="layout-dashboard"></i>Admin</button><button data-demo="waiter"><i data-lucide="bell-ring"></i>Waiter</button><button data-demo="kitchen"><i data-lucide="chef-hat"></i>Kitchen</button></div><small>Sample restaurant data · Simulated payments only</small></div>
+    <footer class="login-footer"><i data-lucide="shield-check"></i> A secure workspace for your restaurant team</footer>
+  </div></section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/login.js') }}" defer></script>{% endblock %}

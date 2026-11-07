@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Workspace · {{ restaurant.name }}{% endblock %}
+{% block body_class %}staff-page{% endblock %}
+{% block head %}<script src="{{ url_for('static', filename='vendor/chart.umd.js') }}" defer></script>{% endblock %}
+{% block content %}
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="/staff"><span class="brand-symbol">e<span>o</span></span><span>ember & olive<small>RESTAURANT WORKSPACE</small></span></a>
+  <div class="location-card"><span class="location-icon"><i data-lucide="store"></i></span><div><b id="restaurant-label">{{ restaurant.name }}</b><small><span class="dot"></span> Open for good times</small></div></div>
+  <span class="nav-label">WORKSPACE</span><nav id="staff-nav" aria-label="Staff navigation"></nav>
+  <div class="sidebar-bottom"><div class="demo-note"><i data-lucide="sprout"></i><b>A fresh take on service.</b><p>Everything your team needs,<br>in one thoughtful workspace.</p><span>DEMO ENVIRONMENT</span></div><button class="profile" data-action="account"><span class="avatar">{{ user.name[0] }}</span><span><b>{{ user.name }}</b><small>{{ user.role|title }} account</small></span><i data-lucide="settings-2"></i></button><button class="logout" data-action="logout"><i data-lucide="log-out"></i> Sign out</button></div>
+</aside>
+<div class="staff-shell"><header class="topbar"><div class="topbar-left"><button class="icon-btn mobile-menu" data-action="sidebar" aria-label="Toggle navigation"><i data-lucide="menu"></i></button><span class="muted">Workspace</span><span class="slash">/</span><b id="breadcrumb">Overview</b></div><div class="topbar-right"><a class="btn soft small customer-preview-link" href="/customer" target="_blank"><i data-lucide="smartphone"></i> Customer View</a><span class="live-status" id="live-status"><span class="dot"></span> Live updates</span><span class="topbar-divider"></span><button class="icon-btn" data-action="refresh" aria-label="Refresh data"><i data-lucide="refresh-cw"></i></button>{% if user.role != 'kitchen' %}<button class="icon-btn notification-btn" data-action="notifications" aria-label="Open notifications"><i data-lucide="bell"></i><span id="notification-count"></span></button>{% endif %}<span class="avatar small">{{ user.name[0] }}</span></div></header>
+<main id="staff-content" class="workspace-content"><div class="loading-state">Preparing your workspace…</div></main>
+<footer class="workspace-footer"><span>Ember & Olive · Smart Dining System</span><span>Local demonstration · All payments are simulated</span></footer></div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/staff.js') }}" defer></script>{% endblock %}

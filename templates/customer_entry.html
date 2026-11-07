@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Customer View · {{ restaurant.name }}{% endblock %}
+{% block body_class %}customer-page public-page{% endblock %}
+{% block content %}
+<header class="public-header">
+  <a class="brand" href="/"><span class="brand-symbol">e<span>o</span></span><span>{{ restaurant.name }}<small>GOOD FOOD. GREAT COMPANY.</small></span></a>
+  <a class="btn secondary" href="/"><i data-lucide="arrow-left"></i> Home</a>
+</header>
+<main class="public-main table-picker-main">
+  <div class="picker-heading"><div><span class="eyebrow">CUSTOMER VIEW</span><h1>Find your seat.</h1><p>{% if picker_enabled %}Choose the table you’re seated at. Your menu is a tap away.{% else %}Scan the QR code on your table to open its digital menu.{% endif %}</p></div><span class="pill green"><i data-lucide="smile"></i> No staff login needed</span></div>
+  {% if current_visit %}<div class="continue-table"><span class="extra-icon"><i data-lucide="armchair"></i></span><div><b>Your table is waiting.</b><p>Return to your current menu, orders and shared bill.</p></div><a class="btn primary" href="/menu/{{ current_visit.table.token }}">Continue Table {{ '%02d' % current_visit.table.number }} <i data-lucide="arrow-right"></i></a></div>{% endif %}
+  {% if picker_enabled %}
+  <div class="picker-explainer"><i data-lucide="info"></i><p>Already seated with friends? Choose the same table to join their group. Reserved tables need a member of staff to seat you first.</p><a href="/customer" class="text-btn"><i data-lucide="refresh-cw"></i> Refresh tables</a></div>
+  {% for zone, zone_tables in tables|groupby('zone') %}
+  <section class="picker-zone"><div class="picker-zone-title"><h2>{{ zone }}</h2><span>{{ zone_tables|length }} tables</span></div><div class="picker-grid">
+    {% for table in zone_tables %}
+    <article class="picker-card {{ table.status }}">
+      <div class="picker-card-top"><span class="picker-seat-icon"><i data-lucide="{{ 'lock-keyhole' if table.status == 'reserved' else 'armchair' }}"></i></span><span class="status-badge {{ table.status }}"><span class="dot"></span>{{ table.status }}</span></div>
+      <h3>Table <span>{{ '%02d' % table.number }}</span></h3><p><i data-lucide="users"></i> Up to {{ table.capacity }} guests</p>
+      {% if table.status == 'reserved' %}<span class="reserved-note">Please speak to your waiter</span>{% else %}<a class="btn {{ 'primary' if table.status == 'available' else 'soft' }} full" href="/menu/{{ table.token }}" aria-label="{{ 'View menu' if table.status == 'available' else 'Join group' }} at Table {{ '%02d' % table.number }}">{{ 'View menu' if table.status == 'available' else 'Join your group' }} <i data-lucide="arrow-right"></i></a>{% endif %}
+    </article>
+    {% endfor %}
+  </div></section>
+  {% else %}<div class="panel scan-message"><i data-lucide="qr-code"></i><h2>We’re getting your table ready.</h2><p>No tables are available to display. Please ask a member of staff for help.</p></div>{% endfor %}
+  <p class="picker-footnote">For this local demo, choose a table above. At the restaurant, scanning its printed QR opens that table directly.</p>
+  {% else %}
+  <section class="panel scan-message"><i data-lucide="qr-code"></i><h2>Your table has its own menu link.</h2><p>Open your phone camera, point it at the table QR and tap the link.<br>If you need a hand, just ask your waiter.</p><a class="btn secondary" href="/">Back to welcome</a></section>
+  {% endif %}
+</main>
+<footer class="public-footer"><span>{{ restaurant.name }} · Your table, taken care of.</span><a href="/login">Staff Login</a></footer>
+{% endblock %}
