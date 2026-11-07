@@ -98,6 +98,11 @@ def create_app(test_config=None):
         db.create_all()
         seed_database(app.config['PUBLIC_BASE_URL'])
         print('Database ready. Open http://127.0.0.1:5001')
+            from seed import seed_database
+
+    with app.app_context():
+        db.create_all()
+        seed_database(app.config['PUBLIC_BASE_URL'])
 
     return app
 
