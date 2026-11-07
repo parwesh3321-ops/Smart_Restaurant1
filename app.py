@@ -88,10 +88,7 @@ def create_app(test_config=None):
         return render_template('error.html', code=500, message='Something went wrong. Please try again.'), 500
 
     
-    app = create_app()
-    app.run(host=os.getenv('HOST', '127.0.0.1'), port=app.config['PORT'], debug=False)
-@
-
+    
     
     @app.get('/health')
     def health():
